@@ -12,6 +12,8 @@
 		B7B0FAC320F3AAE300EFFEA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7B0FAC120F3AAE300EFFEA3 /* Main.storyboard */; };
 		B7B0FAC520F3AAE400EFFEA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7B0FAC420F3AAE400EFFEA3 /* Assets.xcassets */; };
 		B7B0FAC820F3AAE400EFFEA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7B0FAC620F3AAE400EFFEA3 /* LaunchScreen.storyboard */; };
+		B7B0FAD620F3ABFB00EFFEA3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0FAD520F3ABFB00EFFEA3 /* CoreDataManager.swift */; };
+		B7B0FADA20F3B04400EFFEA3 /* Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B7B0FAD820F3B04400EFFEA3 /* Notes.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		B7B0FAC420F3AAE400EFFEA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7B0FAC720F3AAE400EFFEA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7B0FAC920F3AAE400EFFEA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7B0FAD520F3ABFB00EFFEA3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		B7B0FAD920F3B04400EFFEA3 /* Notes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notes.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +58,64 @@
 		B7B0FABC20F3AAE300EFFEA3 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
-				B7B0FABD20F3AAE300EFFEA3 /* AppDelegate.swift */,
-				B7B0FABF20F3AAE300EFFEA3 /* ViewController.swift */,
-				B7B0FAC120F3AAE300EFFEA3 /* Main.storyboard */,
+				B7B0FAD720F3B02000EFFEA3 /* CoreData */,
+				B7B0FAD420F3ABED00EFFEA3 /* Managers */,
+				B7B0FACF20F3AB2200EFFEA3 /* ApplicationDelegate */,
+				B7B0FAD020F3AB3C00EFFEA3 /* ViewControllers */,
+				B7B0FAD220F3AB7300EFFEA3 /* Storyboards */,
 				B7B0FAC420F3AAE400EFFEA3 /* Assets.xcassets */,
-				B7B0FAC620F3AAE400EFFEA3 /* LaunchScreen.storyboard */,
 				B7B0FAC920F3AAE400EFFEA3 /* Info.plist */,
 			);
 			path = Notes;
+			sourceTree = "<group>";
+		};
+		B7B0FACF20F3AB2200EFFEA3 /* ApplicationDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				B7B0FABD20F3AAE300EFFEA3 /* AppDelegate.swift */,
+			);
+			path = ApplicationDelegate;
+			sourceTree = "<group>";
+		};
+		B7B0FAD020F3AB3C00EFFEA3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B7B0FAD120F3AB5C00EFFEA3 /* RootViewController */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		B7B0FAD120F3AB5C00EFFEA3 /* RootViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B7B0FABF20F3AAE300EFFEA3 /* ViewController.swift */,
+			);
+			path = RootViewController;
+			sourceTree = "<group>";
+		};
+		B7B0FAD220F3AB7300EFFEA3 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				B7B0FAC120F3AAE300EFFEA3 /* Main.storyboard */,
+				B7B0FAC620F3AAE400EFFEA3 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		B7B0FAD420F3ABED00EFFEA3 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				B7B0FAD520F3ABFB00EFFEA3 /* CoreDataManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		B7B0FAD720F3B02000EFFEA3 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				B7B0FAD820F3B04400EFFEA3 /* Notes.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +189,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7B0FAD620F3ABFB00EFFEA3 /* CoreDataManager.swift in Sources */,
 				B7B0FAC020F3AAE300EFFEA3 /* ViewController.swift in Sources */,
 				B7B0FABE20F3AAE300EFFEA3 /* AppDelegate.swift in Sources */,
+				B7B0FADA20F3B04400EFFEA3 /* Notes.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +338,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Notes/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -299,6 +356,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Notes/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,6 +390,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B7B0FAD820F3B04400EFFEA3 /* Notes.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B7B0FAD920F3B04400EFFEA3 /* Notes.xcdatamodel */,
+			);
+			currentVersion = B7B0FAD920F3B04400EFFEA3 /* Notes.xcdatamodel */;
+			path = Notes.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B7B0FAB220F3AAE300EFFEA3 /* Project object */;
 }
