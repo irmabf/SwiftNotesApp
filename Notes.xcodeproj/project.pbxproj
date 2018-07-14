@@ -100,8 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				B7B0FAE620F3C68300EFFEA3 /* AddNoteViewController */,
-				B7B0FAD120F3AB5C00EFFEA3 /* NotesViewController */,
 				B7A5FC3B20FA65A300FAF995 /* NoteViewController */,
+				B7B0FAD120F3AB5C00EFFEA3 /* NotesViewController */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";

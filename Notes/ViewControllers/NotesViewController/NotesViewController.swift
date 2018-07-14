@@ -13,8 +13,8 @@ class NotesViewController: UIViewController {
  
   //MARK:- Segues
   private enum Segue {
-    static let AddNote = "AddNote"
     static let Note = "Note"
+    static let AddNote = "AddNote"
   }
   
   //MARK:- Properties
@@ -23,7 +23,10 @@ class NotesViewController: UIViewController {
   @IBOutlet  var messageLabel: UILabel!
   @IBOutlet var tableView: UITableView!
   
-  var notes: [Note]? {
+  //MARK:-
+  private var coreDataManager = CoreDataManager(modelName: "Notes")
+  
+  private var notes: [Note]? {
     didSet{
       updateView()
     }
@@ -33,10 +36,6 @@ class NotesViewController: UIViewController {
     guard let notes = notes else { return false }
     return notes.count > 0
   }
-  
- 
-  //MARK:-
-  private var coreDataManager = CoreDataManager(modelName: "Notes")
   
   //MARK:-
   private let estimatedRowHeight = CGFloat(44.0)
@@ -77,7 +76,6 @@ class NotesViewController: UIViewController {
       }
       //Configure destination
       destination.note = note
-     
       
     default:
       break
@@ -94,7 +92,7 @@ class NotesViewController: UIViewController {
     tableView.isHidden = !hasNotes
     messageLabel.isHidden = hasNotes
   }
-  
+
   //MARK:-
   private func setupMessageLabel() {
     messageLabel.text = "You Don´t Have Any notes yet."
@@ -105,29 +103,6 @@ class NotesViewController: UIViewController {
     tableView.isHidden = true
     tableView.estimatedRowHeight = estimatedRowHeight
     tableView.rowHeight = UITableViewAutomaticDimension
-  }
-  
-  private func fetchNotes() {
-    let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
-    fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Note.updatedAt), ascending: false)]
-    coreDataManager.managedObjectContext.performAndWait {
-      do {
-          let notes = try fetchRequest.execute()
-          self.notes = notes
-          self.tableView.reloadData()
-      }catch{
-        print("Unable to Execute Fetch Request")
-        print("\(error), \(error.localizedDescription)")
-      }
-    }
-  }
-  
-  private func setupNotificationHandling() {
-    let notificationCenter = NotificationCenter.default
-    notificationCenter.addObserver(self,
-                                   selector: #selector(managedObjectContextObjectsDidChange(_:)),
-                                   name: Notification.Name.NSManagedObjectContextObjectsDidChange,
-                                   object: coreDataManager.managedObjectContext)
   }
   
   //MARK:- Notification Handling
@@ -178,6 +153,35 @@ class NotesViewController: UIViewController {
     }
   }
   
+  //MARK:- Helper Methods
+ 
+  private func fetchNotes() {
+    let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Note.updatedAt), ascending: false)]
+    coreDataManager.managedObjectContext.performAndWait {
+      do {
+          let notes = try fetchRequest.execute()
+          self.notes = notes
+          self.tableView.reloadData()
+      }catch{
+        print("Unable to Execute Fetch Request")
+        print("\(error), \(error.localizedDescription)")
+      }
+    }
+  }
+  
+  //MARK:-
+  
+  private func setupNotificationHandling() {
+    let notificationCenter = NotificationCenter.default
+    notificationCenter.addObserver(self,
+                                   selector: #selector(managedObjectContextObjectsDidChange(_:)),
+                                   name: Notification.Name.NSManagedObjectContextObjectsDidChange,
+                                   object: coreDataManager.managedObjectContext)
+  }
+  
+
+  
 }
 
 extension NotesViewController: UITableViewDataSource {
@@ -205,6 +209,11 @@ extension NotesViewController: UITableViewDataSource {
     
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    guard editingStyle == .delete else { return }
+    // Fetch note
+    guard let note = notes?[indexPath.row] else { fatalError("Unexpected Index Path")}
+    // Delete the note
+    note.managedObjectContext?.delete(note)
     
   }
 }
